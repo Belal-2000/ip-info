@@ -14,5 +14,6 @@
             "email": "belalibrahim080@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {}
 }
