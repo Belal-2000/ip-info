@@ -2,6 +2,7 @@
 
 namespace Belal\IpInfo\ServiceProviders;
 
+use Belal\IpInfo\IpData;
 use Belal\IpInfo\ServiceProviders\Interface\ServiceProvidersInterface;
 
 class Geolocation implements ServiceProvidersInterface
@@ -26,11 +27,19 @@ class Geolocation implements ServiceProvidersInterface
         $this->data = @json_decode(file_get_contents($url));
     }
 
-    public function getData()
+    public function getData() : IpData
     {
-        return $this->filterData();
+        return new IpData(
+            $this->data->geoplugin_request,
+            $this->ip,
+            $this->data->geoplugin_city,
+            $this->data->geoplugin_countryName,
+            $this->data->geoplugin_countryCode,
+            $this->data->geoplugin_continentName,
+            $this->data->geoplugin_timezone
+        );
     }
-
+    
     private function filterData()
     {
         $filterdData = [

@@ -2,6 +2,7 @@
 
 namespace Belal\IpInfo\ServiceProviders;
 
+use Belal\IpInfo\IpData;
 use Belal\IpInfo\ServiceProviders\Interface\ServiceProvidersInterface;
 
 class IpApi implements ServiceProvidersInterface
@@ -32,24 +33,17 @@ class IpApi implements ServiceProvidersInterface
         $this->data = $data;
     }
 
-    public function getData()
+    public function getData() : IpData
     {
-        return $this->filterData();
-    }
-
-    private function filterData()
-    {
-        $filterdData = [
-            'ipInRequset' => $this->data['query'],
-            'passedIp' => $this->ip,
-            'city' => $this->data['city'],
-            'country' => $this->data['country'],
-            'countryCode' => $this->data['countryCode'],
-            'continent' => $this->data['continent'],
-            'timezone' => $this->data['timezone']
-        ];
-
-        return $filterdData;
+        return new IpData(
+            $this->data['query'],
+            $this->ip,
+            $this->data['city'],
+            $this->data['country'],
+            $this->data['countryCode'],
+            $this->data['continent'],
+            $this->data['timezone']
+        );
     }
 
     public function checkStatus(): bool
