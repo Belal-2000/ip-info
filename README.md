@@ -39,7 +39,7 @@ $result->getTimeZone()
 - if they are different this mean the data is for the ip of the machine that sent the request
 
 
-- The IpData opject is JsonSerializable .. Find more at (THE PHP DOCS)[https://www.php.net/manual/en/jsonserializable.jsonserialize.php].
+- The IpData opject is JsonSerializable .. Find more at [THE PHP DOCS](https://www.php.net/manual/en/jsonserializable.jsonserialize.php).
 
 
 
