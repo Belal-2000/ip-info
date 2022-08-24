@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitb28e399394c7904e641ef0208227c6c8
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
-            'Psr\\SimpleCache\\' => 16,
-        ),
         'B' => 
         array (
             'Belal\\IpInfo\\' => 13,
@@ -18,10 +14,6 @@ class ComposerStaticInitb28e399394c7904e641ef0208227c6c8
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
-        ),
         'Belal\\IpInfo\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

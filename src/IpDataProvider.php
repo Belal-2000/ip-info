@@ -16,7 +16,7 @@ class IpDataProvider
         $this->cache = $cache;
     }
 
-    public function getInfo(string $ip): IpData | NULL
+    public function getInfo(string $ip): IpData | string | NULL
     {
 
         // validate the ip provided
@@ -25,8 +25,8 @@ class IpDataProvider
         }
 
         if($this->cache){
-            if($this->cache->has("IP:{$ip}")){
-                return $this->cache->get("IP:{$ip}");
+            if($this->cache->has("IP{$ip}")){
+                return $this->cache->get("IP{$ip}");
             }
         }
         
@@ -44,7 +44,7 @@ class IpDataProvider
                 $info = $service->getData();
                 if ($info->getCountry()){
                     if($this->cache){
-                        $this->cache->set("IP:{$ip}" , json_encode($info));
+                        $this->cache->set("IP{$ip}" , json_encode($info , 10));
                     }
                     return $info;
                 }
