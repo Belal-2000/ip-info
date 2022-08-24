@@ -2,18 +2,32 @@
 
 namespace Belal\IpInfo;
 
-use Belal\IpInfo\ServiceProviders\Geolocation;
+use Psr\SimpleCache\CacheInterface;
 use Belal\IpInfo\ServiceProviders\IpApi;
+use Belal\IpInfo\ServiceProviders\Geolocation;
 
 class IpDataProvider
 {
     private $serviceProviders;
+    private $cache;
+
+    public function __construct(CacheInterface $cache = null)
+    {
+        $this->cache = $cache;
+    }
 
     public function getInfo(string $ip): IpData | NULL
     {
+
         // validate the ip provided
         if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-            throw new \Exception("The ip provided: ${$ip} is not a valid ip!", 1);
+            throw new \Exception("The ip provided: {$ip} is not a valid ip!", 1);
+        }
+
+        if($this->cache){
+            if($this->cache->has("IP:{$ip}")){
+                return $this->cache->get("IP:{$ip}");
+            }
         }
         
         // set our serviceProviders
@@ -29,6 +43,9 @@ class IpDataProvider
             if ($service->checkStatus()) {
                 $info = $service->getData();
                 if ($info->getCountry()){
+                    if($this->cache){
+                        $this->cache->set("IP:{$ip}" , json_encode($info));
+                    }
                     return $info;
                 }
             }
