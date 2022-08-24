@@ -9,7 +9,7 @@ use Belal\IpInfo\ServiceProviders\Geolocation;
 class IpDataProvider
 {
     private $serviceProviders;
-    private $cache;
+    public $cache;
 
     public function __construct(CacheInterface $cache = null)
     {
@@ -21,7 +21,7 @@ class IpDataProvider
 
         // validate the ip provided
         if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-            throw new \Exception("The ip provided: {$ip} is not a valid ip!", 1);
+            throw new \InvalidArgumentException("The ip provided: {$ip} is not a valid ip!", 1);
         }
 
         if($this->cache){

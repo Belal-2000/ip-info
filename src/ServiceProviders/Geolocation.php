@@ -4,13 +4,14 @@ namespace Belal\IpInfo\ServiceProviders;
 
 use Belal\IpInfo\IpData;
 use Belal\IpInfo\ServiceProviders\Interface\ServiceProvidersInterface;
+use Exception;
 
 class Geolocation implements ServiceProvidersInterface
 {
     /**
      *
      * Must Check first for status 
-     * using checkStatus mathod
+     * using checkStatus method
      * 
      */
     private $data;
@@ -29,6 +30,9 @@ class Geolocation implements ServiceProvidersInterface
 
     public function getData() : IpData
     {
+        if(!$this->data){
+            throw new \Exception('Can\'t getData before checkStatus!' , 1);
+        }
         return new IpData(
             $this->data->geoplugin_request,
             $this->ip,

@@ -10,7 +10,7 @@ class IpApi implements ServiceProvidersInterface
     /**
      *
      * Must Check first for status 
-     * using checkStatus mathod
+     * using checkStatus method
      * 
      */
 
@@ -35,6 +35,9 @@ class IpApi implements ServiceProvidersInterface
 
     public function getData() : IpData
     {
+        if(!$this->data){
+            throw new \Exception('Can\'t getData before checkStatus!' , 1);
+        }
         return new IpData(
             $this->data['query'],
             $this->ip,

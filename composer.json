@@ -14,5 +14,11 @@
             "email": "belalibrahim080@gmail.com"
         }
     ],
-    "minimum-stability": "stable"
+    "scripts": {
+        "phpUnint":["php ./vendor/bin/phpunit --testdox tests"]
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
 }
